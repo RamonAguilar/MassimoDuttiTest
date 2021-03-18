@@ -11,6 +11,8 @@ export class AccountsService {
 
   private userSubject: BehaviorSubject<User>;
   public user: Observable<User>;
+  private users = JSON.parse(localStorage.getItem('users')) || [];
+
 
   constructor(
       private router: Router,
@@ -25,7 +27,20 @@ export class AccountsService {
 
 
   login(username, password) {
+    console.log('entra aqui username', username);
+    console.log('entra aqui password', password);
+
+    const user = this.users.find(x => x.username === username && x.password === password);
+
+    console.log('entra aqui user', this.users);
+    console.log('entra es falso ??? user', user);
+
+    if (!user) return this.error('Username or password is incorrect');
+    localStorage.setItem('user', JSON.stringify(user));
+    this.userSubject.next(user);
+    return this.ok();
   }
+  
 
   logout() {
       // remove user from local storage and set current user to null
@@ -36,15 +51,14 @@ export class AccountsService {
 
   register(user: User) {
     
-      let users = JSON.parse(localStorage.getItem('users')) || [];
 
-      if (users.find(x => x.username === user.username)) {
+      if (this.users.find(x => x.username === user.username)) {
           return this.error('Username "' + user.username + '" is already taken')
       }
 
-      user.id = users.length ? Math.max(...users.map(x => x.id)) + 1 : 1;
-      users.push(user);
-      localStorage.setItem('users', JSON.stringify(users));
+      user.id = this.users.length ? Math.max(...this.users.map(x => x.id)) + 1 : 1;
+      this.users.push(user);
+      localStorage.setItem('users', JSON.stringify(this.users));
       return this.ok();
   
   }
