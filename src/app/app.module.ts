@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { PrincipalComponent } from './components/principal/principal.component';
+import { AccountsModule } from './accounts/accounts.module';
 
 
 @NgModule({
@@ -23,8 +24,8 @@ import { PrincipalComponent } from './components/principal/principal.component';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    PrincipalModule
-
+    PrincipalModule,
+    AccountsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
