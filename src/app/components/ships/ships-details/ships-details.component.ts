@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { ShipsService } from 'src/app/services/ships.service';
 declare var $: any;
 
 
@@ -13,30 +14,39 @@ export class ShipsDetailsComponent implements OnInit {
   config: any;
   shipId: string = '';
   url: string = '';
+  urlImg: string = 'https://starwars-visualguide.com/assets/img/starships/';
+  
   // Modal
   titleDetails: string = '';
   modelDetails: string = '';
   starship_class: string = '';
 
-  constructor() { 
+  constructor( private shipsService: ShipsService ) { 
   }
   
   ngOnInit(): void {
-      this.config = {
-        itemsPerPage: 5,
-        currentPage: 1,
-        totalItems: this.dataList.length
-      };
+    this.config = {
+      itemsPerPage: 10,
+      currentPage: 1,
+    };
+  }
+
+  setPageConfig(count){
+    this.config["totalItems"] = count;
+    return this.config;
   }
 
   getStarshipId(url) {
     this.shipId = url.replace(/^\D+|\D+$/g, "");
-    const urlImage = `https://starwars-visualguide.com/assets/img/starships/${this.shipId}.jpg`;
+    const urlImage = `${this.urlImg}${this.shipId}.jpg`;
     return urlImage;
   }
 
   pageChanged(event){
     this.config.currentPage = event;
+    this.shipsService.getShipsByPage(event).subscribe((ships) => {
+      this.dataList = ships;
+    })
   }
 
   openDetails(details) {
