@@ -13,7 +13,7 @@ export class ShipsComponent implements OnInit {
   constructor( private shipsService: ShipsService) {}
 
   ngOnInit(): void {
-    this.shipsService.getShips().subscribe((ships) => {
+    this.shipsService.getShipsByPage(1).subscribe((ships) => {
       this.dataList = ships;
       console.log('SHIPS -->', this.dataList.results)
     })
