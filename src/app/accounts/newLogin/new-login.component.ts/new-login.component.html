@@ -1,0 +1,49 @@
+<div class="col-md-4 col-md-offset-4 container mt-4">
+    <h2 class="text-center">Iniciar sesión</h2>
+    <p class="text-center">Introduzca su correo y contraseña para acceder</p>
+    <form [formGroup]="loginForm" (ngSubmit)="loginUser()" class="form">
+        <div class="form-group mt-5" [ngClass]="{ 'has-error': loginForm.invalid }">
+            <input
+                type="text"
+                class="form-control"
+                placeholder="Username"
+                formControlName="username"/>
+                <hr class="hr-line">
+            <div class="input-group-append form__required" *ngIf="loginForm.get('username').invalid">
+                <span class="colorInvalid">
+                    <i>Username is required</i>
+                </span>
+            </div>
+        </div>
+        <div class="form-group mt-5" [ngClass]="{ 'has-error': loginForm.invalid }">
+            <!-- <label for="password">Password</label> -->
+            <input
+            type="password"
+            class="form-control"
+            placeholder="Password"
+            formControlName="password"/>
+            <hr class="hr-line">
+            <div class="input-group-append form__required" *ngIf="loginForm.get('password').invalid">
+                <span class="colorInvalid">
+                    <i>Password is required</i>
+                </span>
+            </div>
+        </div>
+        <div class="buttons">
+            <!-- <button type="submit" [disabled]="loginForm.invalid" class="btn buttons__login">Iniciar sesión</button> -->
+            <button type="submit" [disabled]="loginForm.invalid" class="btn buttons__login">
+                Iniciar sesión
+                <span *ngIf="dataLoading" class="spinner-border spinner-border-sm mr-1"></span>
+            </button>
+            <div class="text-center">
+                <span class="buttons_span">¿ Aún no tienes una cuenta?</span> <a routerLink="../newRegister" class="btn buttons__link">Regístrate</a>
+            </div>
+            <!-- <button type="button" class="btn buttons__register" routerLink="/register">Iniciar sesión</button> -->
+        </div>
+        <div class="input-group-append" *ngIf="unregistered">
+            <span class="colorInvalid">
+                <i>Unregistered user</i>
+            </span>
+        </div>
+    </form>
+</div>
