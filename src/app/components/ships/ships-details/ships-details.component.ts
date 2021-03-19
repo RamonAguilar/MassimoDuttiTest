@@ -1,6 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import { ShipsService } from 'src/app/services/ships.service';
+import { shipsState } from '../ships.reducer';
 declare var $: any;
+
+import * as fromShips from '../ships.action';
 
 
 @Component({
@@ -10,7 +15,8 @@ declare var $: any;
 })
 export class ShipsDetailsComponent implements OnInit {
 
-  @Input() dataList: any;
+  data$: Observable<any>;
+  dataList: any;
   config: any;
   shipId: string = '';
   url: string = '';
@@ -21,10 +27,18 @@ export class ShipsDetailsComponent implements OnInit {
   modelDetails: string = '';
   starship_class: string = '';
 
-  constructor( private shipsService: ShipsService ) { 
+  constructor( 
+    private shipsService: ShipsService,
+    private store : Store<shipsState>
+  ) { 
+    this.data$ = this.store.select('ship');
   }
   
   ngOnInit(): void {
+    this.data$.subscribe((ships)=> {
+      this.dataList = ships.ship;
+    })
+    
     this.config = {
       itemsPerPage: 10,
       currentPage: 1,
@@ -46,6 +60,7 @@ export class ShipsDetailsComponent implements OnInit {
     this.config.currentPage = event;
     this.shipsService.getShipsByPage(event).subscribe((ships) => {
       this.dataList = ships;
+      this.store.dispatch(new fromShips.NewShips(ships));
     })
   }
 
