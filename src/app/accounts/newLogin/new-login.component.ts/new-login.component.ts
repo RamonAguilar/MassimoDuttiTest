@@ -4,19 +4,16 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { AccountsService } from 'src/app/services/accounts.service';
 
-// JSON
-import usersList from 'src/assets/json/users.json';
-
 @Component({
   selector: 'app-new-login.component.ts',
   templateUrl: './new-login.component.html',
   styleUrls: ['./new-login.component.scss']
 })
+
 export class NewLogin implements OnInit {
 
   loginForm: FormGroup;
   dataLoading: boolean = false;
-  users: any = usersList;
   unregistered: boolean = false;
   invalid: boolean = false;
   returnUrl: string;
@@ -36,9 +33,8 @@ export class NewLogin implements OnInit {
 
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
-  loginUser() {
 
-    // this.submitted = true;
+  loginUser() {
 
     if (this.loginForm.invalid) {
       return;
