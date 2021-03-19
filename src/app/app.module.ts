@@ -11,7 +11,9 @@ import { RegisterComponent } from './components/register/register.component';
 import { PrincipalComponent } from './components/principal/principal.component';
 import { AccountsModule } from './accounts/accounts.module';
 import { HttpClientModule } from '@angular/common/http';
-
+import {StoreModule} from '@ngrx/store';
+import { shipReducer } from './components/ships/ships.reducer';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,13 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule,
     ReactiveFormsModule,
     PrincipalModule,
-    AccountsModule
+    StoreDevtoolsModule.instrument({
+      maxAge: 10
+    }),
+    AccountsModule,
+    StoreModule.forRoot({
+      ship: shipReducer
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
