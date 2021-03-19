@@ -13,7 +13,6 @@ export class NewRegister implements OnInit {
 
   registerForm: FormGroup;
   loading = false;
-  submitted = false;
 
   constructor(
       private formBuilder: FormBuilder,
@@ -37,7 +36,6 @@ export class NewRegister implements OnInit {
   }
 
   registerUser() {
-    this.submitted = true;
 
     if (this.registerForm.invalid) {
       return;
