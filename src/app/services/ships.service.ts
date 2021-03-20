@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http'
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators'
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -20,8 +19,15 @@ export class ShipsService {
   constructor( private http: HttpClient ) {}
 
   getShipsByPage( page: number): Observable<any>{
-    return this.http.get(this.url+page).pipe( 
-      map( data => { return data })
-      );
+
+    const shipsFromCache = JSON.parse(localStorage.getItem('ships'+page)) || null;
+    if (shipsFromCache) {
+      return of(shipsFromCache);
+    }
+    const response =this.http.get(this.url+page);
+    response.subscribe((ships) =>{
+      localStorage.setItem('ships'+page, JSON.stringify(ships))
+    });
+    return response;
   }
 }
