@@ -35,4 +35,6 @@ Navigate to `http://localhost:4200/`.
 
 # Notas del desarrollador:
 
+ Para la tarea número 7: 
 
+    1.- Se ha añadido un lazy loading a las imágenes. Esto permite que no se carguen todas las imagenes al cargar la página, sino que las carga según el usuario vaya moviendo la vista. El servidor se satura menos porque se hacen menos peticiones de golpe y la página carga antes.
