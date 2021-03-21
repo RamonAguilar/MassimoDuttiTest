@@ -14,13 +14,15 @@ import { HttpClientModule } from '@angular/common/http';
 import {StoreModule} from '@ngrx/store';
 import { shipReducer } from './components/ships/ships.reducer';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { AlertComponent } from './components/alert/alert.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    PrincipalComponent
+    PrincipalComponent,
+    AlertComponent
   ],
   imports: [
     BrowserModule,

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { AccountsService } from 'src/app/services/accounts.service';
+import { AlertService } from 'src/app/services/alert.service';
 
 @Component({
   selector: 'app-new-register.component.ts',
@@ -18,6 +19,7 @@ export class NewRegister implements OnInit {
       private formBuilder: FormBuilder,
       private router: Router,
       private accountService: AccountsService,
+      private alertService: AlertService
   ) {
       // redirect to home if already logged in
       if (this.accountService.userValue) {
@@ -37,6 +39,9 @@ export class NewRegister implements OnInit {
 
   registerUser() {
 
+    // reset alerts on submit
+    this.alertService.clear();
+
     if (this.registerForm.invalid) {
       return;
     }
@@ -46,10 +51,12 @@ export class NewRegister implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
+          this.alertService.success('Registration successful', { keepAfterRouteChange: true });
           this.router.navigate(['../newLogin']);
         },
         error => {
           this.loading = false;
+          this.alertService.error(error.error.message);
         });
   }
 }

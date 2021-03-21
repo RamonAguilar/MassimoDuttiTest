@@ -11,3 +11,24 @@
         left: -104px !important;
     }
 }
+
+// Menu animated
+
+.dropdown_menu{
+    .dropdown_item{
+        transform-origin: top center;
+        animation: slideDown 300ms ease-in-out forwards;
+    }
+}
+         
+@keyframes slideDown {
+  0% { 
+    opacity: 0;
+    transform: translateY(-60px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
