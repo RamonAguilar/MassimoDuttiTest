@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AccountsService } from 'src/app/services/accounts.service';
 
 @Component({
   selector: 'app-principal',
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PrincipalComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private accountsService: AccountsService
+  ) { }
+
+  user: any;
 
   ngOnInit(): void {
+    this.user = JSON.parse(localStorage.getItem('user')) || {};
+  }
+
+  logOut(){
+    this.accountsService.logout();
   }
 
 }
