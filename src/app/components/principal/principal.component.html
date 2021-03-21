@@ -1,19 +1,19 @@
 <nav class="navbar navbar-dark principalHeader">
     <div class="dropdown">
         <i class="fas fa-bars" id="dropdownMenuButton" data-toggle="dropdown"></i>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" [routerLink]="'ships'">Ships</a>
-            <a class="dropdown-item" [routerLink]="'pageOne'">Page One</a>
-            <a class="dropdown-item" [routerLink]="'pageTwo'">Page Two</a>
-            <a class="dropdown-item" [routerLink]="''">Login</a>
+        <div class="dropdown-menu dropdown_menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item dropdown_item" [routerLink]="'ships'">Ships</a>
+            <a class="dropdown-item dropdown_item" [routerLink]="'pageOne'">Page One</a>
+            <a class="dropdown-item dropdown_item" [routerLink]="'pageTwo'">Page Two</a>
+            <a class="dropdown-item dropdown_item" [routerLink]="''">Login</a>
         </div>
     </div>
     <div class="dropdown right">
         <a class="pointer" id="dropdownMenuButton" data-toggle="dropdown">{{user.first_name || 'Not An User'}}</a>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item pointer" (click)="logOut()">Log Out</a>
-            <a class="dropdown-item" [routerLink]="'pageOne'">Account settings</a>
-            <a class="dropdown-item" [routerLink]="'pageTwo'">My Ships</a>
+        <div class="dropdown-menu dropdown_menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item dropdown_item pointer" (click)="logOut()">Log Out</a>
+            <a class="dropdown-item dropdown_item" [routerLink]="'pageOne'">Account settings</a>
+            <a class="dropdown-item dropdown_item" [routerLink]="'pageTwo'">My Ships</a>
         </div>
     </div>
 </nav>
