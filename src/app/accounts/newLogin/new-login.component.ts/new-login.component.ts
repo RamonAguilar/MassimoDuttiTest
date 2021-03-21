@@ -3,6 +3,7 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { AccountsService } from 'src/app/services/accounts.service';
+import { AlertService } from 'src/app/services/alert.service';
 
 @Component({
   selector: 'app-new-login.component.ts',
@@ -23,6 +24,7 @@ export class NewLogin implements OnInit {
     private accountService: AccountsService,
     private router: Router,
     private route: ActivatedRoute,
+    private alertService: AlertService
   ) { }
 
   ngOnInit(): void {
@@ -35,6 +37,9 @@ export class NewLogin implements OnInit {
   }
 
   loginUser() {
+
+    // reset alerts on submit
+    this.alertService.clear();
 
     if (this.loginForm.invalid) {
       return;
@@ -51,6 +56,7 @@ export class NewLogin implements OnInit {
         error => {
           this.dataLoading = false;
           this.unregistered = true;
+          this.alertService.error(error.error.message);
         });
   }
 }
