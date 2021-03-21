@@ -37,10 +37,29 @@ Navigate to `http://localhost:4200/`.
 
  Para la tarea número 7: 
 
-    1.- Se ha añadido un lazy loading a las imágenes. Esto permite que no se carguen todas las imágenes al cargar la página, sino que las carga según el usuario vaya moviendo la vista. El servidor se satura menos porque se hacen menos peticiones de golpe y la página carga antes.
+    1.- Se ha añadido un lazy loading a las imágenes. Esto permite que no se carguen todas las imágenes al cargar
+    la página, sino que las carga según el usuario vaya moviendo la vista. El servidor se satura menos porque se
+    hacen menos peticiones de golpe y la página carga antes.
 
-    2.- Se ha simulado el guardado de los datos en cache para no hacer repetición de peticiones. Esto se ha hecho con localStorage, pero lo óptimo sería instalar plugins mejor pensados para esta tarea.
+    2.- Se ha simulado el guardado de los datos en cache para no hacer repetición de peticiones. Esto se ha hecho
+    con localStorage, pero lo óptimo sería instalar plugins mejor pensados para esta tarea.
+
+    Otras posibles mejoras no dependientes de código incluirían:
 
     3.- Aumentar el número de servidores para tener una mayor potencia.
 
-    4.- Actualizar la cache con menos frecuencia (depende de los usuarios).
+    4.- Actualizar la caché con menos frecuencia (depende de los usuarios).
+
+Además de realizar las tareas previstas, se han añadido algunas funcionalidades ideadas por mí para mejorar la
+experiencia de usuario. Estas medidas incluyen:
+
+    - Botón funcional de logout que permite salir de la cuenta de usuario. Este botón se encuentra dentro de un
+    desplegable en la parte derecha de la barra de navegación. Dentro de este desplegable se incluyen también 
+    los botones "Account settings" y "My ships", que en un proyecto real podrían servir para cambiar la 
+    configuración de la cuenta o para almacenar los items favoritos del usuario. Intencionalmente, estas 
+    funcionalidades no han sido implementadas al clickar en dichos botones, sólo ejemplifican mi concepto sobre
+    cómo mejorar la página.
+
+    - Sistema de alerta que muestra mensajes en forma de modal para informar al usuario durante el registro y 
+    el loggin de la cuenta. Estos mensajes incluyen la alerta de "usuario o contraseña no válidos" durante el 
+    loggin, informan del error de "usuario ya registrado" y del correcto registro del usuario en el sistema.
